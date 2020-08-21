@@ -17,6 +17,7 @@
 		A9CB330724F0692F004191B4 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB330624F0692F004191B4 /* ResetPasswordViewModel.swift */; };
 		A9CB330A24F06DA1004191B4 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB330924F06DA1004191B4 /* AuthenticationViewModel.swift */; };
 		A9CB330D24F07115004191B4 /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB330C24F07115004191B4 /* FormViewModel.swift */; };
+		A9CB330F24F073BF004191B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9CB330E24F073BF004191B4 /* GoogleService-Info.plist */; };
 		A9D1A82424EF9157001EAE4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D1A82324EF9157001EAE4B /* AppDelegate.swift */; };
 		A9D1A82624EF9157001EAE4B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D1A82524EF9157001EAE4B /* SceneDelegate.swift */; };
 		A9D1A82D24EF9158001EAE4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9D1A82C24EF9158001EAE4B /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		A9CB330624F0692F004191B4 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		A9CB330924F06DA1004191B4 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		A9CB330C24F07115004191B4 /* FormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
+		A9CB330E24F073BF004191B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A9D1A82024EF9157001EAE4B /* OnboardingTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnboardingTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9D1A82324EF9157001EAE4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9D1A82524EF9157001EAE4B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 		A9D1A82224EF9157001EAE4B /* OnboardingTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				A9CB330E24F073BF004191B4 /* GoogleService-Info.plist */,
 				A9D1A83124EF9158001EAE4B /* Info.plist */,
 				A9D1A82C24EF9158001EAE4B /* Assets.xcassets */,
 				A9D1A83824EF93D9001EAE4B /* API */,
@@ -222,6 +225,7 @@
 			files = (
 				A9D1A83024EF9158001EAE4B /* LaunchScreen.storyboard in Resources */,
 				A9D1A82D24EF9158001EAE4B /* Assets.xcassets in Resources */,
+				A9CB330F24F073BF004191B4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
