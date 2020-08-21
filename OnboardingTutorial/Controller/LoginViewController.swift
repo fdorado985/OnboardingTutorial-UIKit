@@ -15,6 +15,8 @@ class LoginViewController: UIViewController {
   private let iconImageView = UIImageView(image: #imageLiteral(resourceName: "firebase-logo"))
   private let emailTextField = OTTextField(placeholder: "Email")
   private let passwordTextField = OTTextField(placeholder: "Password", isSecureTextEntry: true)
+  private let separatorView = OTSeparatorView()
+
   private let loginButton: UIButton = {
     let button = UIButton(type: .system)
     button.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
@@ -25,6 +27,56 @@ class LoginViewController: UIViewController {
     button.setHeight(height: 50)
     button.isEnabled = false
     button.setTitle("Log In", for: .normal)
+    return button
+  }()
+
+  private let forgotPasswordButton: UIButton = {
+    let button = UIButton(type: .system)
+
+    let regularAttributes = [
+      NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 0.87),
+      NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)
+    ]
+    let attributedTitle = NSMutableAttributedString(string: "Forgot your password? ", attributes: regularAttributes)
+
+    let boldAttributes = [
+      NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 0.87),
+      NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)
+    ]
+    attributedTitle.append(NSAttributedString(string: "Get help signing in.", attributes: boldAttributes))
+
+    button.setAttributedTitle(attributedTitle, for: .normal)
+    button.addTarget(self, action: #selector(forgotPasswordButtonDidTap), for: .touchUpInside)
+    return button
+  }()
+
+  private let googleLoginButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setImage(#imageLiteral(resourceName: "btn_google_light_pressed_ios").withRenderingMode(.alwaysOriginal), for: .normal)
+    button.setTitle("  Log in with Google", for: .normal)
+    button.setTitleColor(.white, for: .normal)
+    button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+    button.addTarget(self, action: #selector(googleLoginButtonDidTap), for: .touchUpInside)
+    return button
+  }()
+
+  private let signUpButton: UIButton = {
+    let button = UIButton(type: .system)
+
+    let regularAttributes = [
+      NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 0.87),
+      NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)
+    ]
+    let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ", attributes: regularAttributes)
+
+    let boldAttributes = [
+      NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 0.87),
+      NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)
+    ]
+    attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: boldAttributes))
+
+    button.setAttributedTitle(attributedTitle, for: .normal)
+    button.addTarget(self, action: #selector(signUpButtonDidTap), for: .touchUpInside)
     return button
   }()
 
@@ -40,6 +92,18 @@ class LoginViewController: UIViewController {
   @objc private func loginButtonDidTap(_ sender: UIButton) {
     print("DEBUG: Handle login...")
   }
+
+  @objc private func forgotPasswordButtonDidTap(_ sender: UIButton) {
+    print("DEBUG: Handle forgot password...")
+  }
+
+  @objc private func googleLoginButtonDidTap(_ sender: UIButton) {
+    print("DEBUG: Handle google login...")
+  }
+
+  @objc private func signUpButtonDidTap(_ sender: UIButton) {
+    print("DEBUG: Handle sign up...")
+  }
 }
 
 // MARK: - Configure View
@@ -49,9 +113,15 @@ extension LoginViewController {
   private func configureViewController() {
     navigationController?.navigationBar.isHidden = true
     navigationController?.navigationBar.barStyle = .black
+    setupLayouts()
+  }
+
+  private func setupLayouts() {
     configureBackground()
     configureIconImageView()
     configureLoginFields()
+    configureAlternativeLoginFields()
+    configureSignUpButton()
   }
 
   private func configureBackground() {
@@ -70,10 +140,13 @@ extension LoginViewController {
   }
 
   private func configureLoginFields() {
-    let stackView = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton])
+    let stackView = UIStackView(arrangedSubviews: [
+      emailTextField,
+      passwordTextField,
+      loginButton
+    ])
     stackView.axis = .vertical
     stackView.spacing = 20
-    stackView.distribution = .fillEqually
 
     view.addSubview(stackView)
     stackView.anchor(
@@ -84,5 +157,31 @@ extension LoginViewController {
       paddingLeft: 32,
       paddingRight: 32
     )
+  }
+
+  private func configureAlternativeLoginFields() {
+    let stackView = UIStackView(arrangedSubviews: [
+      forgotPasswordButton,
+      separatorView,
+      googleLoginButton
+    ])
+    stackView.axis = .vertical
+    stackView.spacing = 20
+
+    view.addSubview(stackView)
+    stackView.anchor(
+      top: loginButton.bottomAnchor,
+      left: view.leftAnchor,
+      right: view.rightAnchor,
+      paddingTop: 24,
+      paddingLeft: 32,
+      paddingRight: 32
+    )
+  }
+
+  private func configureSignUpButton() {
+    view.addSubview(signUpButton)
+    signUpButton.centerX(inView: view)
+    signUpButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 16)
   }
 }
