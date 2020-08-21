@@ -50,6 +50,8 @@ class SignUpViewController: UIViewController {
     return button
   }()
 
+  private var viewModel = SignUpViewModel()
+
   // MARK: - View lifecycle
 
   override func viewDidLoad() {
@@ -65,6 +67,29 @@ class SignUpViewController: UIViewController {
 
   @objc private func signUpButtonDidTap(_ sender: UIButton) {
     print("DEBUG: Handle sign up...")
+  }
+
+  @objc private func textDidChange(_ sender: UITextField) {
+    if sender === emailTextField {
+      viewModel.email = sender.text
+    } else if sender === passwordTextField {
+      viewModel.password = sender.text
+    } else if sender === fullNameTextField {
+      viewModel.fullName = sender.text
+    }
+
+    updateForm()
+  }
+}
+
+// MARK: - FormViewModel
+
+extension SignUpViewController: FormViewModel {
+
+  func updateForm() {
+    signUpButton.isEnabled = viewModel.shouldEnableButton
+    signUpButton.backgroundColor = viewModel.buttonBackgroundColor
+    signUpButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
   }
 }
 
@@ -101,6 +126,10 @@ extension SignUpViewController {
     ])
     stackView.axis = .vertical
     stackView.spacing = 20
+
+    fullNameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
 
     view.addSubview(stackView)
     stackView.anchor(

@@ -118,10 +118,13 @@ class LoginViewController: UIViewController {
 
     updateForm()
   }
+}
 
-  // MARK: - Methods
+// MARK: - FormViewModel
 
-  private func updateForm() {
+extension LoginViewController: FormViewModel {
+
+  func updateForm() {
     loginButton.isEnabled = viewModel.shouldEnableButton
     loginButton.backgroundColor = viewModel.buttonBackgroundColor
     loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)

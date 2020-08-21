@@ -36,6 +36,8 @@ class ResetPasswordViewController: UIViewController {
     return button
   }()
 
+  private var viewModel = ResetPasswordViewModel()
+
   // MARK: - View lifecycle
 
   override func viewDidLoad() {
@@ -50,6 +52,25 @@ class ResetPasswordViewController: UIViewController {
 
   @objc private func backButtonDidTap(_ sender: UIButton) {
     navigationController?.popViewController(animated: true)
+  }
+
+  @objc private func textDidChange(_ sender: UITextField) {
+    if sender === emailTextField {
+      viewModel.email = sender.text
+    }
+
+    updateForm()
+  }
+}
+
+// MARK: - FormViewModel
+
+extension ResetPasswordViewController: FormViewModel {
+
+  func updateForm() {
+    sendResetLinkButton.isEnabled = viewModel.shouldEnableButton
+    sendResetLinkButton.backgroundColor = viewModel.buttonBackgroundColor
+    sendResetLinkButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
   }
 }
 
@@ -84,6 +105,8 @@ extension ResetPasswordViewController {
     ])
     stackView.axis = .vertical
     stackView.spacing = 20
+
+    emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
 
     view.addSubview(stackView)
     stackView.anchor(
