@@ -13,46 +13,19 @@ class LoginViewController: UIViewController {
   // MARK: - Properties
 
   private let iconImageView = UIImageView(image: #imageLiteral(resourceName: "firebase-logo"))
-
-  private let emailTextField: UITextField = {
-    let textField = UITextField()
-
-    let spacer = UIView()
-    spacer.setDimensions(height: 50, width: 12)
-    textField.leftView = spacer
-    textField.leftViewMode = .always
-
-    textField.borderStyle = .none
-    textField.textColor = .white
-    textField.keyboardAppearance = .dark
-    textField.backgroundColor = UIColor(white: 1, alpha: 0.1)
-    textField.setHeight(height: 50)
-    textField.attributedPlaceholder = NSAttributedString(
-      string: "Email",
-      attributes: [.foregroundColor: UIColor(white: 1, alpha: 0.7)]
-    )
-    return textField
-  }()
-
-  private let passwordTextField: UITextField = {
-    let textField = UITextField()
-
-    let spacer = UIView()
-    spacer.setDimensions(height: 50, width: 12)
-    textField.leftView = spacer
-    textField.leftViewMode = .always
-
-    textField.borderStyle = .none
-    textField.textColor = .white
-    textField.keyboardAppearance = .dark
-    textField.isSecureTextEntry = true
-    textField.backgroundColor = UIColor(white: 1, alpha: 0.1)
-    textField.setHeight(height: 50)
-    textField.attributedPlaceholder = NSAttributedString(
-      string: "Password",
-      attributes: [.foregroundColor: UIColor(white: 1, alpha: 0.7)]
-    )
-    return textField
+  private let emailTextField = OTTextField(placeholder: "Email")
+  private let passwordTextField = OTTextField(placeholder: "Password", isSecureTextEntry: true)
+  private let loginButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+    button.setTitleColor(UIColor(white: 1, alpha: 0.67), for: .normal)
+    button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+    button.layer.cornerRadius = 5
+    button.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
+    button.setHeight(height: 50)
+    button.isEnabled = false
+    button.setTitle("Log In", for: .normal)
+    return button
   }()
 
   // MARK: - View lifecycle
@@ -61,7 +34,15 @@ class LoginViewController: UIViewController {
     super.viewDidLoad()
     configureViewController()
   }
+
+  // MARK: - Actions
+
+  @objc private func loginButtonDidTap(_ sender: UIButton) {
+    print("DEBUG: Handle login...")
+  }
 }
+
+// MARK: - Configure View
 
 extension LoginViewController {
 
@@ -89,7 +70,7 @@ extension LoginViewController {
   }
 
   private func configureLoginFields() {
-    let stackView = UIStackView(arrangedSubviews: [emailTextField, passwordTextField])
+    let stackView = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton])
     stackView.axis = .vertical
     stackView.spacing = 20
     stackView.distribution = .fillEqually
