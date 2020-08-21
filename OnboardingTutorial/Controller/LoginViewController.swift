@@ -80,6 +80,8 @@ class LoginViewController: UIViewController {
     return button
   }()
 
+  private var viewModel = LoginViewModel()
+
   // MARK: - View lifecycle
 
   override func viewDidLoad() {
@@ -105,6 +107,16 @@ class LoginViewController: UIViewController {
   @objc private func signUpButtonDidTap(_ sender: UIButton) {
     let signUpVC = SignUpViewController()
     navigationController?.pushViewController(signUpVC, animated: true)
+  }
+
+  @objc private func textDidChange(_ sender: UITextField) {
+    if sender === emailTextField {
+      viewModel.email = sender.text
+    } else if sender === passwordTextField {
+      viewModel.password = sender.text
+    }
+
+    print("DEBUG: Form is valid: \(viewModel.formIsValid)")
   }
 }
 
@@ -141,6 +153,9 @@ extension LoginViewController {
     ])
     stackView.axis = .vertical
     stackView.spacing = 20
+
+    emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
 
     view.addSubview(stackView)
     stackView.anchor(
