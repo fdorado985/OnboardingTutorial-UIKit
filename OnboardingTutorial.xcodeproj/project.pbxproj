@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,6 +25,7 @@
 		A9D1A83024EF9158001EAE4B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9D1A82E24EF9158001EAE4B /* LaunchScreen.storyboard */; };
 		A9D1A83F24EF942D001EAE4B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D1A83E24EF942D001EAE4B /* LoginViewController.swift */; };
 		A9D1A84124EF974E001EAE4B /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D1A84024EF974E001EAE4B /* UIView+Ext.swift */; };
+		A9D7DC6624F07D49009CA823 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D7DC6524F07D49009CA823 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		A9D1A83124EF9158001EAE4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9D1A83E24EF942D001EAE4B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A9D1A84024EF974E001EAE4B /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		A9D7DC6524F07D49009CA823 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D70F9B62C58EC4A0E2DB0C21 /* Pods-OnboardingTutorial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnboardingTutorial.debug.xcconfig"; path = "Target Support Files/Pods-OnboardingTutorial/Pods-OnboardingTutorial.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,7 +80,6 @@
 				D70F9B62C58EC4A0E2DB0C21 /* Pods-OnboardingTutorial.debug.xcconfig */,
 				1515D70E1A266339381A1EC7 /* Pods-OnboardingTutorial.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -150,6 +151,7 @@
 				A9D1A83E24EF942D001EAE4B /* LoginViewController.swift */,
 				A9CB32FE24F03C80004191B4 /* ResetPasswordViewController.swift */,
 				A9CB32FC24F03A0E004191B4 /* SignUpViewController.swift */,
+				A9D7DC6524F07D49009CA823 /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -346,6 +348,7 @@
 				A9CB330A24F06DA1004191B4 /* AuthenticationViewModel.swift in Sources */,
 				A9CB330324F06915004191B4 /* LoginViewModel.swift in Sources */,
 				A9CB330D24F07115004191B4 /* FormViewModel.swift in Sources */,
+				A9D7DC6624F07D49009CA823 /* HomeViewController.swift in Sources */,
 				A9CB330124F03E97004191B4 /* UIViewController+Ext.swift in Sources */,
 				A9D1A83F24EF942D001EAE4B /* LoginViewController.swift in Sources */,
 				A9CB32FD24F03A0E004191B4 /* SignUpViewController.swift in Sources */,
