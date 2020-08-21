@@ -13,6 +13,7 @@
 		A9D1A82D24EF9158001EAE4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9D1A82C24EF9158001EAE4B /* Assets.xcassets */; };
 		A9D1A83024EF9158001EAE4B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9D1A82E24EF9158001EAE4B /* LaunchScreen.storyboard */; };
 		A9D1A83F24EF942D001EAE4B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D1A83E24EF942D001EAE4B /* LoginViewController.swift */; };
+		A9D1A84124EF974E001EAE4B /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D1A84024EF974E001EAE4B /* UIView+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A9D1A82F24EF9158001EAE4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A9D1A83124EF9158001EAE4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9D1A83E24EF942D001EAE4B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A9D1A84024EF974E001EAE4B /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		A9D1A83D24EF93E3001EAE4B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A9D1A84024EF974E001EAE4B /* UIView+Ext.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			files = (
 				A9D1A83F24EF942D001EAE4B /* LoginViewController.swift in Sources */,
 				A9D1A82824EF9157001EAE4B /* ViewController.swift in Sources */,
+				A9D1A84124EF974E001EAE4B /* UIView+Ext.swift in Sources */,
 				A9D1A82424EF9157001EAE4B /* AppDelegate.swift in Sources */,
 				A9D1A82624EF9157001EAE4B /* SceneDelegate.swift in Sources */,
 			);

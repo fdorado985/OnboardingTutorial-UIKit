@@ -10,6 +10,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+  // MARK: - Properties
+
+  private let iconImageView = UIImageView(image: #imageLiteral(resourceName: "firebase-logo"))
+
   // MARK: - View lifecycle
 
   override func viewDidLoad() {
@@ -24,6 +28,7 @@ extension LoginViewController {
     navigationController?.navigationBar.isHidden = true
     navigationController?.navigationBar.barStyle = .black
     configureBackground()
+    configureIconImageView()
   }
 
   private func configureBackground() {
@@ -32,5 +37,12 @@ extension LoginViewController {
     gradient.locations = [0, 1]
     view.layer.addSublayer(gradient)
     gradient.frame = view.frame
+  }
+
+  private func configureIconImageView() {
+    view.addSubview(iconImageView)
+    iconImageView.centerX(inView: view)
+    iconImageView.setDimensions(height: 120, width: 120)
+    iconImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
   }
 }
