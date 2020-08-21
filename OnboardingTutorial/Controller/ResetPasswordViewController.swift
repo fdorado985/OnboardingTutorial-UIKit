@@ -1,5 +1,5 @@
 //
-//  SignUpViewController.swift
+//  ResetPasswordViewController.swift
 //  OnboardingTutorial
 //
 //  Created by Juan Francisco Dorado Torres on 21/08/20.
@@ -8,45 +8,31 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class ResetPasswordViewController: UIViewController {
 
   // MARK: - Properties
 
   private let iconImageView = UIImageView(image: #imageLiteral(resourceName: "firebase-logo"))
-  private let fullNameTextField = OTTextField(placeholder: "Full Name")
   private let emailTextField = OTTextField(placeholder: "Email")
-  private let passwordTextField = OTTextField(placeholder: "Password", isSecureTextEntry: true)
 
-  private let signUpButton: UIButton = {
+  private let sendResetLinkButton: UIButton = {
     let button = UIButton(type: .system)
-    button.addTarget(self, action: #selector(signUpButtonDidTap), for: .touchUpInside)
+    button.addTarget(self, action: #selector(sendResetLinkButtonDidTap), for: .touchUpInside)
     button.setTitleColor(UIColor(white: 1, alpha: 0.67), for: .normal)
     button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
     button.layer.cornerRadius = 5
     button.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
     button.setHeight(height: 50)
     button.isEnabled = false
-    button.setTitle("Sign Up", for: .normal)
+    button.setTitle("Send Reset Link", for: .normal)
     return button
   }()
 
-  private let loginButton: UIButton = {
+  private let backButton: UIButton = {
     let button = UIButton(type: .system)
-
-    let regularAttributes = [
-      NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 0.87),
-      NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)
-    ]
-    let attributedTitle = NSMutableAttributedString(string: "Already have an account? ", attributes: regularAttributes)
-
-    let boldAttributes = [
-      NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 0.87),
-      NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)
-    ]
-    attributedTitle.append(NSAttributedString(string: "Log In", attributes: boldAttributes))
-
-    button.setAttributedTitle(attributedTitle, for: .normal)
-    button.addTarget(self, action: #selector(logInButtonDidTap), for: .touchUpInside)
+    button.tintColor = .white
+    button.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
+    button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
     return button
   }()
 
@@ -59,18 +45,17 @@ class SignUpViewController: UIViewController {
 
   // MARK: - Actions
 
-  @objc private func logInButtonDidTap(_ sender: UIButton) {
-    navigationController?.popViewController(animated: true)
+  @objc private func sendResetLinkButtonDidTap(_ sender: UIButton) {
   }
 
-  @objc private func signUpButtonDidTap(_ sender: UIButton) {
-    print("DEBUG: Handle sign up...")
+  @objc private func backButtonDidTap(_ sender: UIButton) {
+    navigationController?.popViewController(animated: true)
   }
 }
 
 // MARK: - Configure View
 
-extension SignUpViewController {
+extension ResetPasswordViewController {
 
   private func configureViewController() {
     navigationController?.navigationBar.isHidden = true
@@ -82,7 +67,7 @@ extension SignUpViewController {
   private func setupLayouts() {
     configureIconImageView()
     configureLoginFields()
-    configureSignUpButton()
+    configureBackButton()
   }
 
   private func configureIconImageView() {
@@ -94,10 +79,8 @@ extension SignUpViewController {
 
   private func configureLoginFields() {
     let stackView = UIStackView(arrangedSubviews: [
-      fullNameTextField,
       emailTextField,
-      passwordTextField,
-      signUpButton
+      sendResetLinkButton
     ])
     stackView.axis = .vertical
     stackView.spacing = 20
@@ -113,9 +96,8 @@ extension SignUpViewController {
     )
   }
 
-  private func configureSignUpButton() {
-    view.addSubview(loginButton)
-    loginButton.centerX(inView: view)
-    loginButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 16)
+  private func configureBackButton() {
+    view.addSubview(backButton)
+    backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingTop: 16, paddingLeft: 16)
   }
 }

@@ -94,7 +94,8 @@ class LoginViewController: UIViewController {
   }
 
   @objc private func forgotPasswordButtonDidTap(_ sender: UIButton) {
-    print("DEBUG: Handle forgot password...")
+    let resetPasswordVC = ResetPasswordViewController()
+    navigationController?.pushViewController(resetPasswordVC, animated: true)
   }
 
   @objc private func googleLoginButtonDidTap(_ sender: UIButton) {
@@ -114,23 +115,15 @@ extension LoginViewController {
   private func configureViewController() {
     navigationController?.navigationBar.isHidden = true
     navigationController?.navigationBar.barStyle = .black
+    configureBackground()
     setupLayouts()
   }
 
   private func setupLayouts() {
-    configureBackground()
     configureIconImageView()
     configureLoginFields()
     configureAlternativeLoginFields()
     configureSignUpButton()
-  }
-
-  private func configureBackground() {
-    let gradient = CAGradientLayer()
-    gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor]
-    gradient.locations = [0, 1]
-    view.layer.addSublayer(gradient)
-    gradient.frame = view.frame
   }
 
   private func configureIconImageView() {
