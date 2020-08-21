@@ -102,7 +102,8 @@ class LoginViewController: UIViewController {
   }
 
   @objc private func signUpButtonDidTap(_ sender: UIButton) {
-    print("DEBUG: Handle sign up...")
+    let signUpVC = SignUpViewController()
+    navigationController?.pushViewController(signUpVC, animated: true)
   }
 }
 
