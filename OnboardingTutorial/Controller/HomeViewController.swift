@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
   // MARK: - Actions
 
   @objc func navigationLeftBarButtonItemDidTap(_ sender: UIBarButtonItem) {
-    logout()
+    showLogoutAlert()
   }
 
   // MARK: - Methods
@@ -32,9 +32,7 @@ class HomeViewController: UIViewController {
   private func authenticateUser() {
     if Auth.auth().currentUser?.uid == nil {
       DispatchQueue.main.async {
-        let loginVC = UINavigationController(rootViewController: LoginViewController())
-        loginVC.modalPresentationStyle = .fullScreen
-        self.present(loginVC, animated: true)
+        self.presentLoginViewController()
 
       }
     } else {
@@ -42,9 +40,32 @@ class HomeViewController: UIViewController {
     }
   }
 
+  private func showLogoutAlert() {
+    let alert = UIAlertController(
+      title: nil,
+      message: "Are you sure you want to log out?",
+      preferredStyle: .actionSheet
+    )
+
+    alert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { [weak self] _ in
+      guard let self = self else { return }
+      self.logout()
+    }))
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+    present(alert, animated: true)
+  }
+
+  private func presentLoginViewController() {
+    let loginVC = UINavigationController(rootViewController: LoginViewController())
+    loginVC.modalPresentationStyle = .fullScreen
+    self.present(loginVC, animated: true)
+  }
+
   private func logout() {
     do {
       try Auth.auth().signOut()
+      presentLoginViewController()
     } catch {
       print("Error: \(error.localizedDescription)")
     }
@@ -60,7 +81,13 @@ extension HomeViewController {
     navigationController?.navigationBar.barStyle = .black
     navigationItem.title = "Firebase Login"
     let image = UIImage(systemName: "arrow.left")
-    navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(navigationLeftBarButtonItemDidTap))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(
+      image: image,
+      style: .plain,
+      target: self,
+      action: #selector(navigationLeftBarButtonItemDidTap)
+    )
+    navigationItem.leftBarButtonItem?.tintColor = .white
     configureBackground()
   }
 }

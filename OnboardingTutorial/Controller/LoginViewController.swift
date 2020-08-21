@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
 
@@ -92,7 +93,10 @@ class LoginViewController: UIViewController {
   // MARK: - Actions
 
   @objc private func loginButtonDidTap(_ sender: UIButton) {
-    print("DEBUG: Handle login...")
+    guard let email = emailTextField.text else { return }
+    guard let password = passwordTextField.text else { return }
+
+    loginUser(email, password)
   }
 
   @objc private func forgotPasswordButtonDidTap(_ sender: UIButton) {
@@ -117,6 +121,20 @@ class LoginViewController: UIViewController {
     }
 
     updateForm()
+  }
+
+  // MARK: - Methods
+
+  private func loginUser(_ email: String, _ password: String) {
+    Auth.auth().signIn(withEmail: email, password: password) { [weak self] (_, error) in
+      guard let self = self else { return }
+      if let error = error {
+        print("Error: \(error.localizedDescription)")
+        return
+      }
+
+      self.dismiss(animated: true)
+    }
   }
 }
 
