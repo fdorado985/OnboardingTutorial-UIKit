@@ -116,7 +116,15 @@ class LoginViewController: UIViewController {
       viewModel.password = sender.text
     }
 
-    print("DEBUG: Form is valid: \(viewModel.formIsValid)")
+    updateForm()
+  }
+
+  // MARK: - Methods
+
+  private func updateForm() {
+    loginButton.isEnabled = viewModel.shouldEnableButton
+    loginButton.backgroundColor = viewModel.buttonBackgroundColor
+    loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
   }
 }
 
