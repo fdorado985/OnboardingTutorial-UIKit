@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
 
@@ -105,7 +106,7 @@ class LoginViewController: UIViewController {
   }
 
   @objc private func googleLoginButtonDidTap(_ sender: UIButton) {
-    print("DEBUG: Handle google login...")
+    GIDSignIn.sharedInstance()?.signIn()
   }
 
   @objc private func signUpButtonDidTap(_ sender: UIButton) {
@@ -146,6 +147,15 @@ extension LoginViewController: FormViewModel {
     loginButton.isEnabled = viewModel.shouldEnableButton
     loginButton.backgroundColor = viewModel.buttonBackgroundColor
     loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+  }
+}
+
+// MARK: - GID SignIn Delegate
+
+extension LoginViewController: GIDSignInDelegate {
+
+  func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+
   }
 }
 
@@ -205,6 +215,9 @@ extension LoginViewController {
     ])
     stackView.axis = .vertical
     stackView.spacing = 20
+
+    GIDSignIn.sharedInstance()?.presentingViewController = self
+    GIDSignIn.sharedInstance()?.delegate = self
 
     view.addSubview(stackView)
     stackView.anchor(
