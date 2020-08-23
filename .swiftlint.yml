@@ -5,3 +5,4 @@ line_length:
 
 excluded:
 - Pods
+- OnboardingTutorial/Utils/Constants.swift
