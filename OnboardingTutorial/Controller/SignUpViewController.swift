@@ -71,7 +71,17 @@ class SignUpViewController: UIViewController {
     guard let password = passwordTextField.text else { return }
     guard let fullName = fullNameTextField.text else { return }
 
-    createUser(email, password, fullName)
+    OTService.createUser(email, password, fullName) { [weak self] (result, error) in
+      guard let self = self else { return }
+      if let error = error {
+        print("\(#function) \(error.localizedDescription)")
+        return
+      }
+
+      guard let uid = result?.user.uid else { return }
+      let values = ["email": email, "fullName": fullName]
+      self.addUserToDatabase(uid, values)
+    }
   }
 
   @objc private func textDidChange(_ sender: UITextField) {
@@ -88,22 +98,8 @@ class SignUpViewController: UIViewController {
 
   // MARK: - Methods
 
-  private func createUser(_ email: String, _ password: String, _ fullName: String) {
-    Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
-      guard let self = self else { return }
-      if let error = error {
-        print("\(#function) \(error.localizedDescription)")
-        return
-      }
-
-      guard let uid = result?.user.uid else { return }
-      let values = ["email": email, "fullName": fullName]
-      self.addUserToDatabase(uid, values)
-    }
-  }
-
   private func addUserToDatabase(_ uid: String, _ values: [String: String]) {
-    Database.database().reference().child("users").child(uid).updateChildValues(values) { (error, _) in
+    OTService.addUserToDatabase(uid, values) { (error, _) in
       if let error = error {
         print("\(#function) \(error.localizedDescription)")
         return

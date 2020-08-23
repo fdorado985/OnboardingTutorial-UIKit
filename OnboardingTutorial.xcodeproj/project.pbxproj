@@ -26,6 +26,7 @@
 		A9D1A83F24EF942D001EAE4B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D1A83E24EF942D001EAE4B /* LoginViewController.swift */; };
 		A9D1A84124EF974E001EAE4B /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D1A84024EF974E001EAE4B /* UIView+Ext.swift */; };
 		A9D7DC6624F07D49009CA823 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D7DC6524F07D49009CA823 /* HomeViewController.swift */; };
+		A9D7DC6824F0A62E009CA823 /* OTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D7DC6724F0A62E009CA823 /* OTService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		A9D1A83E24EF942D001EAE4B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A9D1A84024EF974E001EAE4B /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		A9D7DC6524F07D49009CA823 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		A9D7DC6724F0A62E009CA823 /* OTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTService.swift; sourceTree = "<group>"; };
 		D70F9B62C58EC4A0E2DB0C21 /* Pods-OnboardingTutorial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnboardingTutorial.debug.xcconfig"; path = "Target Support Files/Pods-OnboardingTutorial/Pods-OnboardingTutorial.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +143,7 @@
 		A9D1A83824EF93D9001EAE4B /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A9D7DC6724F0A62E009CA823 /* OTService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				A9CB330724F0692F004191B4 /* ResetPasswordViewModel.swift in Sources */,
 				A9D1A82424EF9157001EAE4B /* AppDelegate.swift in Sources */,
 				A9CB330524F06922004191B4 /* SignUpViewModel.swift in Sources */,
+				A9D7DC6824F0A62E009CA823 /* OTService.swift in Sources */,
 				A9D1A82624EF9157001EAE4B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

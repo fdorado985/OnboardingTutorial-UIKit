@@ -97,7 +97,15 @@ class LoginViewController: UIViewController {
     guard let email = emailTextField.text else { return }
     guard let password = passwordTextField.text else { return }
 
-    loginUser(email, password)
+    OTService.loginUser(email, password) { [weak self] (_, error) in
+      guard let self = self else { return }
+      if let error = error {
+        print("Error: \(error.localizedDescription)")
+        return
+      }
+
+      self.dismiss(animated: true)
+    }
   }
 
   @objc private func forgotPasswordButtonDidTap(_ sender: UIButton) {
@@ -123,20 +131,6 @@ class LoginViewController: UIViewController {
 
     updateForm()
   }
-
-  // MARK: - Methods
-
-  private func loginUser(_ email: String, _ password: String) {
-    Auth.auth().signIn(withEmail: email, password: password) { [weak self] (_, error) in
-      guard let self = self else { return }
-      if let error = error {
-        print("Error: \(error.localizedDescription)")
-        return
-      }
-
-      self.dismiss(animated: true)
-    }
-  }
 }
 
 // MARK: - FormViewModel
@@ -155,7 +149,21 @@ extension LoginViewController: FormViewModel {
 extension LoginViewController: GIDSignInDelegate {
 
   func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+    if let error = error {
+      print("ERROR: \(#function) : \(error.localizedDescription)")
+      return
+    }
 
+    OTService.signInWithGoogle(user: user) { [weak self] (error, _) in
+      guard let self = self else { return }
+      if let error = error {
+        print("\(#function) \(error.localizedDescription)")
+        return
+      }
+
+      print("Sucessfully created user and uploaded user info...")
+      self.dismiss(animated: true)
+    }
   }
 }
 
