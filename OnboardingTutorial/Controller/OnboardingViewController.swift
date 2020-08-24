@@ -63,13 +63,14 @@ extension OnboardingViewController: PaperOnboardingDataSource {
   }
 }
 
-// MARK: -
+// MARK: - PaperOnboardingDelegate
 
 extension OnboardingViewController: PaperOnboardingDelegate {
 
   func onboardingWillTransitonToIndex(_ index: Int) {
-    let shouldShowGetStartedButton = index == onboardingItems.count - 1
-    animateGetStartedButton(shouldShowGetStartedButton)
+    let viewModel = OnboardingViewModel(itemCount: onboardingItems.count)
+    print(viewModel.shouldShowGetStartedButton(at: index))
+    animateGetStartedButton(viewModel.shouldShowGetStartedButton(at: index))
   }
 }
 
@@ -128,6 +129,7 @@ extension OnboardingViewController {
 
   private func configureGetStartedButton() {
     view.addSubview(getStartedButton)
+    getStartedButton.alpha = 0
     getStartedButton.centerX(inView: view)
     getStartedButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 128)
   }
