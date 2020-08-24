@@ -9,6 +9,10 @@
 import Foundation
 import paper_onboarding
 
+protocol OnboardingDelegate: class {
+  func onboardingControllerDidDismiss(_ viewController: OnboardingViewController)
+}
+
 class OnboardingViewController: UIViewController {
 
   // MARK: - Properties
@@ -24,6 +28,8 @@ class OnboardingViewController: UIViewController {
     return button
   }()
 
+  weak var delegate: OnboardingDelegate?
+
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
   }
@@ -38,7 +44,7 @@ class OnboardingViewController: UIViewController {
   // MARK: - Actions
 
   @objc private func getStartedButtonDidTap(_ sender: UIButton) {
-
+    delegate?.onboardingControllerDidDismiss(self)
   }
 
   // MARK: - Methods

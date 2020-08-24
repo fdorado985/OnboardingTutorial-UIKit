@@ -13,6 +13,8 @@ class HomeViewController: UIViewController {
 
   // MARK: - Properties
 
+  private var shouldShowOnboardingController = true
+
   // MARK: - View Lifecycle
 
   override func viewDidLoad() {
@@ -33,10 +35,11 @@ class HomeViewController: UIViewController {
     if Auth.auth().currentUser?.uid == nil {
       DispatchQueue.main.async {
         self.presentLoginViewController()
-
       }
     } else {
-
+      if shouldShowOnboardingController {
+        presentOnboardingViewController()
+      }
     }
   }
 
@@ -62,6 +65,13 @@ class HomeViewController: UIViewController {
     self.present(loginVC, animated: true)
   }
 
+  private func presentOnboardingViewController() {
+    let onboardingVC = OnboardingViewController()
+    onboardingVC.modalPresentationStyle = .fullScreen
+    onboardingVC.delegate = self
+    present(onboardingVC, animated: true)
+  }
+
   private func logout() {
     do {
       try Auth.auth().signOut()
@@ -69,6 +79,16 @@ class HomeViewController: UIViewController {
     } catch {
       print("Error: \(error.localizedDescription)")
     }
+  }
+}
+
+// MARK: - OnboardingDelegate
+
+extension HomeViewController: OnboardingDelegate {
+
+  func onboardingControllerDidDismiss(_ viewController: OnboardingViewController) {
+    viewController.dismiss(animated: true)
+    shouldShowOnboardingController.toggle()
   }
 }
 
