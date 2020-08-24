@@ -170,7 +170,7 @@ extension LoginViewController: GIDSignInDelegate {
       return
     }
 
-    OTService.signInWithGoogle(user: user) { [weak self] (error, _) in
+    OTService.signInWithGoogleFirestore(user: user) { [weak self] (error) in
       guard let self = self else { return }
       if let error = error {
         print("\(#function) \(error.localizedDescription)")

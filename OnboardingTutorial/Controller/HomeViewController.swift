@@ -65,9 +65,14 @@ class HomeViewController: UIViewController {
   }
 
   private func fetchUser() {
-    OTService.fetchUser { [weak self] user in
+    OTService.fetchUserFirestore { [weak self] result in
       guard let self = self else { return }
-      self.user = user
+      switch result {
+      case .success(let user):
+        self.user = user
+      case .failure(let error):
+        self.showMessage("Error", message: error.localizedDescription)
+      }
     }
   }
 
@@ -126,7 +131,7 @@ extension HomeViewController: OnboardingDelegate {
 
   func onboardingControllerDidDismiss(_ viewController: OnboardingViewController) {
     viewController.dismiss(animated: true)
-    OTService.updateUserValuesOnDatabase { [weak self] (error, _) in
+    OTService.updateUserValuesOnFirestore { [weak self] (error) in
       guard let self = self else { return }
       if let error = error {
         print("Error: \(#function) \(error.localizedDescription)")
