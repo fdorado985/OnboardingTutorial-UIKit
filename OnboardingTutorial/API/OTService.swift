@@ -37,15 +37,20 @@ struct OTService {
       }
 
       guard let uid = result?.user.uid else { return }
-      guard let email = result?.user.email else { return }
-      guard let displayName = result?.user.displayName else { return }
-      let values: [String: Any] = [
-        "email": email,
-        "fullName": displayName,
-        "hasSeenOnboarding": false
-      ]
-
-      addUserToDatabase(uid, values, completion: completion)
+      dbReference.child("users").child(uid).observeSingleEvent(of: .value) { (snapshot) in
+        if !snapshot.exists() {
+          guard let email = result?.user.email else { return }
+          guard let displayName = result?.user.displayName else { return }
+          let values: [String: Any] = [
+            "email": email,
+            "fullName": displayName,
+            "hasSeenOnboarding": false
+          ]
+          addUserToDatabase(uid, values, completion: completion)
+        } else {
+          completion(error, dbReference.child("users").child(uid))
+        }
+      }
     }
   }
 
