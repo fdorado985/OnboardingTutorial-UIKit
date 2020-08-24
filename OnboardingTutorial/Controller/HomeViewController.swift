@@ -14,7 +14,13 @@ class HomeViewController: UIViewController {
 
   // MARK: - Properties
 
-  private var shouldShowOnboardingController = true
+  private var user: User? {
+    didSet {
+      if let user = user, !user.hasSeenOnboarding {
+        presentOnboardingViewController()
+      }
+    }
+  }
 
   // MARK: - View Lifecycle
 
@@ -43,8 +49,9 @@ class HomeViewController: UIViewController {
   }
 
   private func fetchUser() {
-    OTService.fetchUser { user in
-      print(user)
+    OTService.fetchUser { [weak self] user in
+      guard let self = self else { return }
+      self.user = user
     }
   }
 
@@ -93,7 +100,15 @@ extension HomeViewController: OnboardingDelegate {
 
   func onboardingControllerDidDismiss(_ viewController: OnboardingViewController) {
     viewController.dismiss(animated: true)
-    shouldShowOnboardingController.toggle()
+    OTService.updateUserValuesOnDatabase { [weak self] (error, _) in
+      guard let self = self else { return }
+      if let error = error {
+        print("Error: \(#function) \(error.localizedDescription)")
+        return
+      }
+
+      self.user?.hasSeenOnboarding.toggle()
+    }
   }
 }
 

@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct User {
+class User {
 
   let uid: String
   let email: String
   let fullName: String
-  let hasSeenOnboarding: Bool
+  var hasSeenOnboarding: Bool
 
   init(uid: String, values: [String: Any]) {
     self.uid = uid

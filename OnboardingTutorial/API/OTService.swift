@@ -61,4 +61,9 @@ struct OTService {
       completion(user)
     }
   }
+
+  static func updateUserValuesOnDatabase(_ completion: @escaping (Error?, DatabaseReference) -> Void) {
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    dbReference.child("users").child(uid).child("hasSeenOnboarding").setValue(true, withCompletionBlock: completion)
+  }
 }
