@@ -71,4 +71,8 @@ struct OTService {
     guard let uid = Auth.auth().currentUser?.uid else { return }
     dbReference.child("users").child(uid).child("hasSeenOnboarding").setValue(true, withCompletionBlock: completion)
   }
+
+  static func resetPassword(for email: String, completion: SendPasswordResetCallback?) {
+    Auth.auth().sendPasswordReset(withEmail: email, completion: completion)
+  }
 }

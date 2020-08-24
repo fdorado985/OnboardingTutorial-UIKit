@@ -117,6 +117,8 @@ class LoginViewController: UIViewController {
 
   @objc private func forgotPasswordButtonDidTap(_ sender: UIButton) {
     let resetPasswordVC = ResetPasswordViewController()
+    resetPasswordVC.delegate = self
+    resetPasswordVC.email = emailTextField.text
     navigationController?.pushViewController(resetPasswordVC, animated: true)
   }
 
@@ -175,7 +177,14 @@ extension LoginViewController: GIDSignInDelegate {
   }
 }
 
-// MARK: - Configure View
+extension LoginViewController: ResetPasswordControllerDelegate {
+
+  func resetPasswordControllerDidSendLink(_ viewController: ResetPasswordViewController) {
+    viewController.navigationController?.popViewController(animated: true)
+  }
+}
+
+// MARK: - Setup View
 
 extension LoginViewController {
 

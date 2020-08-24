@@ -8,9 +8,13 @@
 
 import UIKit
 
+protocol ResetPasswordControllerDelegate: class {
+  func resetPasswordControllerDidSendLink(_ viewController: ResetPasswordViewController)
+}
+
 class ResetPasswordViewController: UIViewController {
 
-  // MARK: - Properties
+  // MARK: - View Properties
 
   private let iconImageView = UIImageView(image: #imageLiteral(resourceName: "firebase-logo"))
   private let emailTextField = OTTextField(placeholder: "Email")
@@ -36,7 +40,11 @@ class ResetPasswordViewController: UIViewController {
     return button
   }()
 
+  // MARK: - Properties
+
   private var viewModel = ResetPasswordViewModel()
+  weak var delegate: ResetPasswordControllerDelegate?
+  var email: String?
 
   // MARK: - View lifecycle
 
@@ -48,6 +56,16 @@ class ResetPasswordViewController: UIViewController {
   // MARK: - Actions
 
   @objc private func sendResetLinkButtonDidTap(_ sender: UIButton) {
+    guard let email = emailTextField.text else { return }
+    OTService.resetPassword(for: email) { [weak self] (error) in
+      guard let self = self else { return }
+      if let error = error {
+        print("Error: \(error.localizedDescription)")
+        return
+      }
+
+      self.delegate?.resetPasswordControllerDidSendLink(self)
+    }
   }
 
   @objc private func backButtonDidTap(_ sender: UIButton) {
@@ -106,6 +124,9 @@ extension ResetPasswordViewController {
     stackView.axis = .vertical
     stackView.spacing = 20
 
+    viewModel.email = email
+    updateForm()
+    emailTextField.text = email
     emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
 
     view.addSubview(stackView)
