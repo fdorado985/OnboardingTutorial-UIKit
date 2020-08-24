@@ -80,6 +80,7 @@ class SignUpViewController: UIViewController {
       self.showLoader(false)
       if let error = error {
         print("\(#function) \(error.localizedDescription)")
+        self.showMessage("Error", message: error.localizedDescription)
         return
       }
 
@@ -113,6 +114,7 @@ class SignUpViewController: UIViewController {
       self.showLoader(false)
       if let error = error {
         print("\(#function) \(error.localizedDescription)")
+        self.showMessage("Error", message: error.localizedDescription)
         return
       }
 

@@ -110,6 +110,7 @@ class LoginViewController: UIViewController {
       self.showLoader(false)
       if let error = error {
         print("Error: \(error.localizedDescription)")
+        self.showMessage("Error", message: error.localizedDescription)
         return
       }
 
@@ -165,6 +166,7 @@ extension LoginViewController: GIDSignInDelegate {
     showLoader(false)
     if let error = error {
       print("ERROR: \(#function) : \(error.localizedDescription)")
+      self.showMessage("Error", message: error.localizedDescription)
       return
     }
 
@@ -172,6 +174,7 @@ extension LoginViewController: GIDSignInDelegate {
       guard let self = self else { return }
       if let error = error {
         print("\(#function) \(error.localizedDescription)")
+        self.showMessage("Error", message: error.localizedDescription)
         return
       }
 
@@ -185,6 +188,7 @@ extension LoginViewController: ResetPasswordControllerDelegate {
 
   func resetPasswordControllerDidSendLink(_ viewController: ResetPasswordViewController) {
     viewController.navigationController?.popViewController(animated: true)
+    showMessage("Success", message: "We sent a link to your email to reset your password!")
   }
 }
 

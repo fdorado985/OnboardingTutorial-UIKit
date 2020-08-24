@@ -130,6 +130,7 @@ extension HomeViewController: OnboardingDelegate {
       guard let self = self else { return }
       if let error = error {
         print("Error: \(#function) \(error.localizedDescription)")
+        self.showMessage("Error", message: error.localizedDescription)
         return
       }
 

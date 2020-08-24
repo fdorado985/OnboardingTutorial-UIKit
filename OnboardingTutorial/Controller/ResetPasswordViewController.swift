@@ -63,6 +63,7 @@ class ResetPasswordViewController: UIViewController {
       self.showLoader(false)
       if let error = error {
         print("Error: \(error.localizedDescription)")
+        self.showMessage("Error", message: error.localizedDescription)
         return
       }
 
