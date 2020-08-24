@@ -12,12 +12,28 @@ import FirebaseAuth
 
 class HomeViewController: UIViewController {
 
+  // MARK: - View Properties
+
+  private let welcomeLabel: UILabel = {
+    let label = UILabel()
+    label.textColor = .white
+    label.numberOfLines = 2
+    label.textAlignment = .center
+    label.alpha = 0
+    label.font = .systemFont(ofSize: 28)
+    label.text = "Welcome"
+    return label
+  }()
+
   // MARK: - Properties
 
   private var user: User? {
     didSet {
-      if let user = user, !user.hasSeenOnboarding {
-        presentOnboardingViewController()
+      if let user = user {
+        showWelcomeMessage(user)
+        if !user.hasSeenOnboarding {
+          presentOnboardingViewController()
+        }
       }
     }
   }
@@ -84,6 +100,14 @@ class HomeViewController: UIViewController {
     present(onboardingVC, animated: true)
   }
 
+  private func showWelcomeMessage(_ user: User) {
+    welcomeLabel.text = "Welcome\n\(user.fullName)!"
+    UIView.animate(withDuration: 0.3) { [weak self] in
+      guard let self = self else { return }
+      self.welcomeLabel.alpha = 1
+    }
+  }
+
   private func logout() {
     do {
       try Auth.auth().signOut()
@@ -129,5 +153,21 @@ extension HomeViewController {
     )
     navigationItem.leftBarButtonItem?.tintColor = .white
     configureBackground()
+    setupLayouts()
+  }
+
+  private func setupLayouts() {
+    configureWelcomeLabel()
+  }
+
+  private func configureWelcomeLabel() {
+    view.addSubview(welcomeLabel)
+    welcomeLabel.centerY(inView: view)
+    welcomeLabel.anchor(
+      left: view.safeAreaLayoutGuide.leftAnchor,
+      right: view.safeAreaLayoutGuide.rightAnchor,
+      paddingLeft: 16,
+      paddingRight: 16
+    )
   }
 }
