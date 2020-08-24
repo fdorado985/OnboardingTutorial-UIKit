@@ -104,8 +104,10 @@ class LoginViewController: UIViewController {
     guard let email = emailTextField.text else { return }
     guard let password = passwordTextField.text else { return }
 
+    showLoader(true)
     OTService.loginUser(email, password) { [weak self] (_, error) in
       guard let self = self else { return }
+      self.showLoader(false)
       if let error = error {
         print("Error: \(error.localizedDescription)")
         return
@@ -123,6 +125,7 @@ class LoginViewController: UIViewController {
   }
 
   @objc private func googleLoginButtonDidTap(_ sender: UIButton) {
+    showLoader(true)
     GIDSignIn.sharedInstance()?.signIn()
   }
 
@@ -159,6 +162,7 @@ extension LoginViewController: FormViewModel {
 extension LoginViewController: GIDSignInDelegate {
 
   func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+    showLoader(false)
     if let error = error {
       print("ERROR: \(#function) : \(error.localizedDescription)")
       return

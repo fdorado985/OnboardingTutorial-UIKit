@@ -57,8 +57,10 @@ class ResetPasswordViewController: UIViewController {
 
   @objc private func sendResetLinkButtonDidTap(_ sender: UIButton) {
     guard let email = emailTextField.text else { return }
+    showLoader(true)
     OTService.resetPassword(for: email) { [weak self] (error) in
       guard let self = self else { return }
+      self.showLoader(false)
       if let error = error {
         print("Error: \(error.localizedDescription)")
         return
