@@ -11,7 +11,7 @@ import Firebase
 
 class SignUpViewController: UIViewController {
 
-  // MARK: - Properties
+  // MARK: - View Properties
 
   private let iconImageView = UIImageView(image: #imageLiteral(resourceName: "firebase-logo"))
   private let fullNameTextField = OTTextField(placeholder: "Full Name")
@@ -51,7 +51,10 @@ class SignUpViewController: UIViewController {
     return button
   }()
 
+  // MARK: - Properties
+
   private var viewModel = SignUpViewModel()
+  weak var delegate: AuthenticationDelegate?
 
   // MARK: - View lifecycle
 
@@ -110,6 +113,7 @@ class SignUpViewController: UIViewController {
       }
 
       print("Sucessfully created user and uploaded user info...")
+      self.delegate?.authenticationDidSucceded(self)
     }
   }
 }

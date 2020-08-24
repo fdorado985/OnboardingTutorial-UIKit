@@ -88,9 +88,11 @@ class HomeViewController: UIViewController {
   }
 
   private func presentLoginViewController() {
-    let loginVC = UINavigationController(rootViewController: LoginViewController())
-    loginVC.modalPresentationStyle = .fullScreen
-    self.present(loginVC, animated: true)
+    let loginVC = LoginViewController()
+    let navController = UINavigationController(rootViewController: loginVC)
+    navController.modalPresentationStyle = .fullScreen
+    loginVC.delegate = self
+    self.present(navController, animated: true)
   }
 
   private func presentOnboardingViewController() {
@@ -133,6 +135,16 @@ extension HomeViewController: OnboardingDelegate {
 
       self.user?.hasSeenOnboarding.toggle()
     }
+  }
+}
+
+// MARK: - AuthenticationDelegate
+
+extension HomeViewController: AuthenticationDelegate {
+
+  func authenticationDidSucceded(_ viewController: UIViewController) {
+    viewController.dismiss(animated: true)
+    authenticateUser()
   }
 }
 

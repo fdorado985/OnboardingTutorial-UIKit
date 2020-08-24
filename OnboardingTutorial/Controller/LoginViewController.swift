@@ -10,9 +10,13 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
+protocol AuthenticationDelegate: class {
+  func authenticationDidSucceded(_ viewController: UIViewController)
+}
+
 class LoginViewController: UIViewController {
 
-  // MARK: - Properties
+  // MARK: - View Properties
 
   private let iconImageView = UIImageView(image: #imageLiteral(resourceName: "firebase-logo"))
   private let emailTextField = OTTextField(placeholder: "Email")
@@ -82,7 +86,10 @@ class LoginViewController: UIViewController {
     return button
   }()
 
+  // MARK: - Properties
+
   private var viewModel = LoginViewModel()
+  weak var delegate: AuthenticationDelegate?
 
   // MARK: - View lifecycle
 
@@ -104,7 +111,7 @@ class LoginViewController: UIViewController {
         return
       }
 
-      self.dismiss(animated: true)
+      self.delegate?.authenticationDidSucceded(self)
     }
   }
 
@@ -119,6 +126,7 @@ class LoginViewController: UIViewController {
 
   @objc private func signUpButtonDidTap(_ sender: UIButton) {
     let signUpVC = SignUpViewController()
+    signUpVC.delegate = delegate
     navigationController?.pushViewController(signUpVC, animated: true)
   }
 
@@ -162,7 +170,7 @@ extension LoginViewController: GIDSignInDelegate {
       }
 
       print("Sucessfully created user and uploaded user info...")
-      self.dismiss(animated: true)
+      self.delegate?.authenticationDidSucceded(self)
     }
   }
 }
