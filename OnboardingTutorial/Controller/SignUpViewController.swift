@@ -75,7 +75,7 @@ class SignUpViewController: UIViewController {
     guard let fullName = fullNameTextField.text else { return }
 
     showLoader(true)
-    OTService.createUser(email, password, fullName) { [weak self] (result, error) in
+    OTService.createUserFirestore(email, password, fullName) { [weak self] (result, error) in
       guard let self = self else { return }
       self.showLoader(false)
       if let error = error {
@@ -88,7 +88,8 @@ class SignUpViewController: UIViewController {
       let values: [String: Any] = [
         "email": email,
         "fullName": fullName,
-        "hasSeenOnboarding": false
+        "hasSeenOnboarding": false,
+        "uid": uid
       ]
       self.addUserToDatabase(uid, values)
     }
@@ -110,7 +111,8 @@ class SignUpViewController: UIViewController {
 
   private func addUserToDatabase(_ uid: String, _ values: [String: Any]) {
     showLoader(true)
-    OTService.addUserToDatabase(uid, values) { (error, _) in
+    OTService.addUserToFirestore(uid, values) { [weak self] (error) in
+      guard let self = self else { return }
       self.showLoader(false)
       if let error = error {
         print("\(#function) \(error.localizedDescription)")

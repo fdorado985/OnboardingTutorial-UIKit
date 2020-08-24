@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseFirestore
 import GoogleSignIn
 
 struct OTService {
@@ -19,7 +20,12 @@ struct OTService {
     Auth.auth().signIn(withEmail: email, password: password, completion: completion)
   }
 
+  @available(*, deprecated, message: "Use `createUserFirestore` instead")
   static func createUser(_ email: String, _ password: String, _ fullName: String, completion: AuthDataResultCallback?) {
+    Auth.auth().createUser(withEmail: email, password: password, completion: completion)
+  }
+
+  static func createUserFirestore(_ email: String, _ password: String, _ fullName: String, completion: AuthDataResultCallback?) {
     Auth.auth().createUser(withEmail: email, password: password, completion: completion)
   }
 
@@ -54,8 +60,13 @@ struct OTService {
     }
   }
 
+  @available(*, deprecated, message: "Use `addUserToFirestore` instead")
   static func addUserToDatabase(_ uid: String, _ values: [String: Any], completion: @escaping (Error?, DatabaseReference) -> Void) {
     dbReference.child("users").child(uid).updateChildValues(values, withCompletionBlock: completion)
+  }
+
+  static func addUserToFirestore(_ uid: String, _ values: [String: Any], completion: ((Error?) -> Void)?) {
+    Firestore.firestore().collection("users").document(uid).setData(values, completion: completion)
   }
 
   static func fetchUser(_ completion: @escaping (User) -> Void) {
