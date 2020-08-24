@@ -7,10 +7,13 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseAuth
+import FirebaseDatabase
 import GoogleSignIn
 
 struct OTService {
+
+  static private let dbReference = Database.database().reference()
 
   static func loginUser(_ email: String, _ password: String, completion: AuthDataResultCallback?) {
     Auth.auth().signIn(withEmail: email, password: password, completion: completion)
@@ -36,13 +39,26 @@ struct OTService {
       guard let uid = result?.user.uid else { return }
       guard let email = result?.user.email else { return }
       guard let displayName = result?.user.displayName else { return }
-      let values = ["email": email, "fullName": displayName]
+      let values: [String: Any] = [
+        "email": email,
+        "fullName": displayName,
+        "hasSeenOnboarding": false
+      ]
 
       addUserToDatabase(uid, values, completion: completion)
     }
   }
 
-  static func addUserToDatabase(_ uid: String, _ values: [String: String], completion: @escaping (Error?, DatabaseReference) -> Void) {
-    Database.database().reference().child("users").child(uid).updateChildValues(values, withCompletionBlock: completion)
+  static func addUserToDatabase(_ uid: String, _ values: [String: Any], completion: @escaping (Error?, DatabaseReference) -> Void) {
+    dbReference.child("users").child(uid).updateChildValues(values, withCompletionBlock: completion)
+  }
+
+  static func fetchUser(_ completion: @escaping (User) -> Void) {
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    dbReference.child("users").child(uid).observeSingleEvent(of: .value) { snapshot in
+      guard let values = snapshot.value as? [String: Any] else { return }
+      let user = User(uid: snapshot.key, values: values)
+      completion(user)
+    }
   }
 }

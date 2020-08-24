@@ -75,7 +75,6 @@ extension OnboardingViewController: PaperOnboardingDelegate {
 
   func onboardingWillTransitonToIndex(_ index: Int) {
     let viewModel = OnboardingViewModel(itemCount: onboardingItems.count)
-    print(viewModel.shouldShowGetStartedButton(at: index))
     animateGetStartedButton(viewModel.shouldShowGetStartedButton(at: index))
   }
 }

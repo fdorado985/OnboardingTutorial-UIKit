@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9E57B3453B1B289B0660E003 /* Pods_OnboardingTutorial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 290F9B58C99C0AFBA9A6F193 /* Pods_OnboardingTutorial.framework */; };
 		A911CFB224F3075E00821615 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A911CFB124F3075E00821615 /* OnboardingViewModel.swift */; };
+		A911CFB424F34F2E00821615 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A911CFB324F34F2E00821615 /* User.swift */; };
 		A95F528F24F1F4CF00493B30 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95F528E24F1F4CF00493B30 /* OnboardingViewController.swift */; };
 		A95F529124F1FA1C00493B30 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95F529024F1FA1C00493B30 /* Constants.swift */; };
 		A9CB32F724F020DD004191B4 /* OTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB32F624F020DD004191B4 /* OTTextField.swift */; };
@@ -36,6 +37,7 @@
 		1515D70E1A266339381A1EC7 /* Pods-OnboardingTutorial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnboardingTutorial.release.xcconfig"; path = "Target Support Files/Pods-OnboardingTutorial/Pods-OnboardingTutorial.release.xcconfig"; sourceTree = "<group>"; };
 		290F9B58C99C0AFBA9A6F193 /* Pods_OnboardingTutorial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnboardingTutorial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A911CFB124F3075E00821615 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		A911CFB324F34F2E00821615 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A95F528E24F1F4CF00493B30 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A95F529024F1FA1C00493B30 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A9CB32F624F020DD004191B4 /* OTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTTextField.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		A9D1A83C24EF93E1001EAE4B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A911CFB324F34F2E00821615 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				A9CB330D24F07115004191B4 /* FormViewModel.swift in Sources */,
 				A9D7DC6624F07D49009CA823 /* HomeViewController.swift in Sources */,
 				A9CB330124F03E97004191B4 /* UIViewController+Ext.swift in Sources */,
+				A911CFB424F34F2E00821615 /* User.swift in Sources */,
 				A9D1A83F24EF942D001EAE4B /* LoginViewController.swift in Sources */,
 				A9CB32FD24F03A0E004191B4 /* SignUpViewController.swift in Sources */,
 				A9CB32FB24F03550004191B4 /* OTSeparatorView.swift in Sources */,

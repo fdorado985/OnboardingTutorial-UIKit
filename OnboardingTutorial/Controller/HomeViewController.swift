@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
 
@@ -37,9 +38,13 @@ class HomeViewController: UIViewController {
         self.presentLoginViewController()
       }
     } else {
-      if shouldShowOnboardingController {
-        presentOnboardingViewController()
-      }
+      fetchUser()
+    }
+  }
+
+  private func fetchUser() {
+    OTService.fetchUser { user in
+      print(user)
     }
   }
 

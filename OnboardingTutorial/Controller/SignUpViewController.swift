@@ -79,7 +79,11 @@ class SignUpViewController: UIViewController {
       }
 
       guard let uid = result?.user.uid else { return }
-      let values = ["email": email, "fullName": fullName]
+      let values: [String: Any] = [
+        "email": email,
+        "fullName": fullName,
+        "hasSeenOnboarding": false
+      ]
       self.addUserToDatabase(uid, values)
     }
   }
@@ -98,7 +102,7 @@ class SignUpViewController: UIViewController {
 
   // MARK: - Methods
 
-  private func addUserToDatabase(_ uid: String, _ values: [String: String]) {
+  private func addUserToDatabase(_ uid: String, _ values: [String: Any]) {
     OTService.addUserToDatabase(uid, values) { (error, _) in
       if let error = error {
         print("\(#function) \(error.localizedDescription)")
